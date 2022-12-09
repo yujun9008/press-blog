@@ -5,7 +5,7 @@ const sidebar = require("./config/sidebar");
 
 export default {
   lang: "zh-CN",
-  base: process.argv[4] === "gitee" ? "/yujun9008.github.io/" : "/",
+  base: "/",
   title: "Jun前端",
   description: "记录前端体系",
   head,

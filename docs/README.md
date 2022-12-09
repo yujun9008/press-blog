@@ -21,7 +21,7 @@ features:
     details: 一个会一点音乐的前端程序员，不妨B站(伟波前端)支持支持。
   - title: 感谢支持
     details: 山不在高，有仙则名。文不在多，有你就足够。欢迎最阳光帅气的 You 看到了这里，据说此刻 star 的人，好运连连哦！
-footer: ISC Licensed | Copyright © 2018-present LiuWeibo
+footer: ISC Licensed | Copyright © 2018-present Jun
 ---
 
 ### 下载下来学习
@@ -31,7 +31,7 @@ footer: ISC Licensed | Copyright © 2018-present LiuWeibo
 
 ```bash
 # 克隆此项目
-git clone https://github.com/Weibozzz/Weibozzz.github.io.git
+git clone https://github.com/yujun9008/yujun9008.github.io.git
 
 # 本地安装
 npm install
