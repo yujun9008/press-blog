@@ -1,0 +1,15 @@
+{
+  "name": "press-blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/yujun9008/press-blog.git",
+  "author": "yujun01 <yujun01@corp.netease.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "devDependencies": {
+    "vuepress": "^2.0.0-beta.54"
+  }
+}

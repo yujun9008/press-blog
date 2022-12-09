@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="generator" content="VuePress 2.0.0-beta.54">
+    <style>
+      :root {
+        --c-bg: #fff;
+      }
+      html.dark {
+        --c-bg: #22272e;
+      }
+      html, body {
+        background-color: var(--c-bg);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem('vuepress-color-scheme');
+			const systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+			if (userMode === 'dark' || (userMode !== 'light' && systemDarkMode)) {
+				document.documentElement.classList.toggle('dark', true);
+			}
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no"><meta name="description" content="前端博客"><meta name="keywords" content="web前端,程序员博客,技术博客,Web开发,Web后端,技术文档"><meta name="author" content="jun,liuweibo"><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><title>防抖函数 debounce | Jun前端</title>
+    <link rel="preload" href="/assets/style.41418640.css" as="style" /><link rel="stylesheet" href="/assets/style.41418640.css" />
+    <link rel="modulepreload" href="/assets/app.01d1d898.js"><link rel="modulepreload" href="/assets/framework.50abb3c3.js"><link rel="modulepreload" href="/assets/节流函数throttle.html.3cb79bb1.js"><link rel="modulepreload" href="/assets/节流函数throttle.html.124cec9e.js"><link rel="prefetch" href="/assets/index.html.97aff0ac.js" as="script" /><link rel="prefetch" href="/assets/guide.html.84e93b4c.js" as="script" /><link rel="prefetch" href="/assets/JSON Web Token实践.html.a823e119.js" as="script" /><link rel="prefetch" href="/assets/index.html.efad7fb3.js" as="script" /><link rel="prefetch" href="/assets/co库原理分析.html.2741ba7c.js" as="script" /><link rel="prefetch" href="/assets/防抖函数debounce.html.af6f4736.js" as="script" /><link rel="prefetch" href="/assets/404.html.c3e557d0.js" as="script" /><link rel="prefetch" href="/assets/index.html.0fa03273.js" as="script" /><link rel="prefetch" href="/assets/guide.html.a55f29b6.js" as="script" /><link rel="prefetch" href="/assets/JSON Web Token实践.html.c9275437.js" as="script" /><link rel="prefetch" href="/assets/index.html.91a94bbd.js" as="script" /><link rel="prefetch" href="/assets/co库原理分析.html.c777a36a.js" as="script" /><link rel="prefetch" href="/assets/防抖函数debounce.html.136f0a0b.js" as="script" /><link rel="prefetch" href="/assets/404.html.3183853c.js" as="script" /><link rel="prefetch" href="/assets/clientConfigs.f6301589.js" as="script" />
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="theme-container"><!--[--><header class="navbar"><div class="toggle-sidebar-button" title="toggle sidebar" aria-expanded="false" role="button" tabindex="0"><div class="icon" aria-hidden="true"><span></span><span></span><span></span></div></div><span><a href="/" class=""><img class="logo" src="/images/avatar.jpg" alt="Jun前端"><span class="site-name can-hide">Jun前端</span></a></span><div class="navbar-items-wrapper" style=""><!--[--><!--]--><nav class="navbar-items can-hide"><!--[--><div class="navbar-item"><a href="/guide.md" class="" aria-label="指南"><!--[--><!--]--> 指南 <!--[--><!--]--></a></div><div class="navbar-item"><a href="/JS/" class="router-link-active" aria-label="前端基础"><!--[--><!--]--> 前端基础 <!--[--><!--]--></a></div><div class="navbar-item"><div class="navbar-dropdown-wrapper"><button class="navbar-dropdown-title" type="button" aria-label="了解更多"><span class="title">了解更多</span><span class="arrow down"></span></button><button class="navbar-dropdown-title-mobile" type="button" aria-label="了解更多"><span class="title">了解更多</span><span class="right arrow"></span></button><ul style="display:none;" class="navbar-dropdown"><!--[--><li class="navbar-dropdown-item"><a class="external-link" href="https://github.com/yujun9008/yujun9008.github.io/commits/master" rel="noopener noreferrer" target="_blank" aria-label="更新日志"><!--[--><!--]--> 更新日志 <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">在新窗口打开</span></span><!--[--><!--]--></a></li><li class="navbar-dropdown-item"><a class="external-link" href="http://www.liuweibo.cn" rel="noopener noreferrer" target="_blank" aria-label="React SSR博客"><!--[--><!--]--> React SSR博客 <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">在新窗口打开</span></span><!--[--><!--]--></a></li><li class="navbar-dropdown-item"><a class="external-link" href="https://github.com/yujun9008/yujun9008-utils" rel="noopener noreferrer" target="_blank" aria-label="个人常用工具库"><!--[--><!--]--> 个人常用工具库 <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">在新窗口打开</span></span><!--[--><!--]--></a></li><li class="navbar-dropdown-item"><a class="external-link" href="https://v2.vuepress.vuejs.org/zh/" rel="noopener noreferrer" target="_blank" aria-label="静态网站生成器"><!--[--><!--]--> 静态网站生成器 <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">在新窗口打开</span></span><!--[--><!--]--></a></li><li class="navbar-dropdown-item"><a class="external-link" href="https://github.com/stevenjoezhang/live2d-widget" rel="noopener noreferrer" target="_blank" aria-label="萌萌哒看板娘"><!--[--><!--]--> 萌萌哒看板娘 <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">在新窗口打开</span></span><!--[--><!--]--></a></li><!--]--></ul></div></div><div class="navbar-item"><a class="external-link" href="https://github.com/yujun9008/yujun9008.github.io" rel="noopener noreferrer" target="_blank" aria-label="GitHub"><!--[--><!--]--> GitHub <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">在新窗口打开</span></span><!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><button class="toggle-color-mode-button" title="toggle color mode"><svg style="" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M16 12.005a4 4 0 1 1-4 4a4.005 4.005 0 0 1 4-4m0-2a6 6 0 1 0 6 6a6 6 0 0 0-6-6z" fill="currentColor"></path><path d="M5.394 6.813l1.414-1.415l3.506 3.506L8.9 10.318z" fill="currentColor"></path><path d="M2 15.005h5v2H2z" fill="currentColor"></path><path d="M5.394 25.197L8.9 21.691l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 25.005h2v5h-2z" fill="currentColor"></path><path d="M21.687 23.106l1.414-1.415l3.506 3.506l-1.414 1.414z" fill="currentColor"></path><path d="M25 15.005h5v2h-5z" fill="currentColor"></path><path d="M21.687 8.904l3.506-3.506l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 2.005h2v5h-2z" fill="currentColor"></path></svg><svg style="display:none;" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M13.502 5.414a15.075 15.075 0 0 0 11.594 18.194a11.113 11.113 0 0 1-7.975 3.39c-.138 0-.278.005-.418 0a11.094 11.094 0 0 1-3.2-21.584M14.98 3a1.002 1.002 0 0 0-.175.016a13.096 13.096 0 0 0 1.825 25.981c.164.006.328 0 .49 0a13.072 13.072 0 0 0 10.703-5.555a1.01 1.01 0 0 0-.783-1.565A13.08 13.08 0 0 1 15.89 4.38A1.015 1.015 0 0 0 14.98 3z" fill="currentColor"></path></svg></button><!----></div></header><!--]--><div class="sidebar-mask"></div><!--[--><aside class="sidebar"><nav class="navbar-items"><!--[--><div class="navbar-item"><a href="/guide.md" class="" aria-label="指南"><!--[--><!--]--> 指南 <!--[--><!--]--></a></div><div class="navbar-item"><a href="/JS/" class="router-link-active" aria-label="前端基础"><!--[--><!--]--> 前端基础 <!--[--><!--]--></a></div><div class="navbar-item"><div class="navbar-dropdown-wrapper"><button class="navbar-dropdown-title" type="button" aria-label="了解更多"><span class="title">了解更多</span><span class="arrow down"></span></button><button class="navbar-dropdown-title-mobile" type="button" aria-label="了解更多"><span class="title">了解更多</span><span class="right arrow"></span></button><ul style="display:none;" class="navbar-dropdown"><!--[--><li class="navbar-dropdown-item"><a class="external-link" href="https://github.com/yujun9008/yujun9008.github.io/commits/master" rel="noopener noreferrer" target="_blank" aria-label="更新日志"><!--[--><!--]--> 更新日志 <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">在新窗口打开</span></span><!--[--><!--]--></a></li><li class="navbar-dropdown-item"><a class="external-link" href="http://www.liuweibo.cn" rel="noopener noreferrer" target="_blank" aria-label="React SSR博客"><!--[--><!--]--> React SSR博客 <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">在新窗口打开</span></span><!--[--><!--]--></a></li><li class="navbar-dropdown-item"><a class="external-link" href="https://github.com/yujun9008/yujun9008-utils" rel="noopener noreferrer" target="_blank" aria-label="个人常用工具库"><!--[--><!--]--> 个人常用工具库 <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">在新窗口打开</span></span><!--[--><!--]--></a></li><li class="navbar-dropdown-item"><a class="external-link" href="https://v2.vuepress.vuejs.org/zh/" rel="noopener noreferrer" target="_blank" aria-label="静态网站生成器"><!--[--><!--]--> 静态网站生成器 <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">在新窗口打开</span></span><!--[--><!--]--></a></li><li class="navbar-dropdown-item"><a class="external-link" href="https://github.com/stevenjoezhang/live2d-widget" rel="noopener noreferrer" target="_blank" aria-label="萌萌哒看板娘"><!--[--><!--]--> 萌萌哒看板娘 <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">在新窗口打开</span></span><!--[--><!--]--></a></li><!--]--></ul></div></div><div class="navbar-item"><a class="external-link" href="https://github.com/yujun9008/yujun9008.github.io" rel="noopener noreferrer" target="_blank" aria-label="GitHub"><!--[--><!--]--> GitHub <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">在新窗口打开</span></span><!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><ul class="sidebar-items"><!--[--><li><p tabindex="0" class="sidebar-item sidebar-heading active">前端基础 <!----></p><ul style="" class="sidebar-item-children"><!--[--><li><a href="/JS/%E9%98%B2%E6%8A%96%E5%87%BD%E6%95%B0debounce.html" class="sidebar-item" aria-label="防抖函数 debounce"><!--[--><!--]--> 防抖函数 debounce <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/JS/%E8%8A%82%E6%B5%81%E5%87%BD%E6%95%B0throttle.html" class="router-link-active router-link-exact-active router-link-active sidebar-item active" aria-label="防抖函数 debounce"><!--[--><!--]--> 防抖函数 debounce <!--[--><!--]--></a><ul style="" class="sidebar-item-children"><!--[--><li><a aria-current="page" href="/JS/%E8%8A%82%E6%B5%81%E5%87%BD%E6%95%B0throttle.html#实现方案" class="router-link-active router-link-exact-active sidebar-item" aria-label="实现方案"><!--[--><!--]--> 实现方案 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/JS/%E8%8A%82%E6%B5%81%E5%87%BD%E6%95%B0throttle.html#underscore-源码中实现" class="router-link-active router-link-exact-active sidebar-item" aria-label="underscore 源码中实现"><!--[--><!--]--> underscore 源码中实现 <!--[--><!--]--></a><!----></li><!--]--></ul></li><!--]--></ul></li><!--]--></ul><!--[--><!--]--></aside><!--]--><!--[--><main class="page"><!--[--><!--]--><div class="theme-default-content"><!--[--><!--]--><div><h1 id="防抖函数-debounce" tabindex="-1"><a class="header-anchor" href="#防抖函数-debounce" aria-hidden="true">#</a> 防抖函数 debounce</h1><p>函数节流适用于函数被频繁调用场景，如 window.onResize,window.onScroll,用户频繁促发的提交按钮等,指在一定的时间间隔内函数只执行一次。</p><h2 id="实现方案" tabindex="-1"><a class="header-anchor" href="#实现方案" aria-hidden="true">#</a> 实现方案</h2><p>一般有以下两种实现方案：</p><p>第一种是用时间戳来判断是否已到执行时间，记录上次执行的时间戳，然后每次触发事件执行回调，回调中判断当前时间戳距离上次执行时间戳的间隔是否已经达到时间差（Xms） ，如果是则执行，并更新上次执行的时间戳，如此循环。</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>const throttle = (fn, wait=1000) =&gt; {
+  let previous = 0;
+  return function(...args){
+    let now = +new Date();
+    if(now - previous &gt; wait){
+      previous = now
+      fn.apply(this, args)
+    }
+  }
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>第二种方法是使用定时器，比如当 scroll 事件刚触发时，打印一个 hello world，然后设置个 1000ms 的定时器，此后每次触发 scroll 事件触发回调，如果已经存在定时器，则回调不执行方法，直到定时器触发，handler 被清除，然后重新设置定时器。</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>const throttle = (fn, wait=1000) =&gt; {
+  let valid = true;
+  return funtion(args){
+    if(!valid){
+      return ;
+    }
+    valid = false
+    timer = setTimeout(() =&gt; {
+      fn.apply(this, args);
+      valid = true
+    }, wait)
+  }
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="underscore-源码中实现" tabindex="-1"><a class="header-anchor" href="#underscore-源码中实现" aria-hidden="true">#</a> underscore 源码中实现</h2><p>上述代码实现了一个简单的节流函数，不过 underscore 实现了更高级的功能，即新增了两个功能</p><ul><li>配置是否需要响应事件刚开始的那次回调（ leading 参数，false 时忽略）</li><li>配置是否需要响应事件结束后的那次回调（ trailing 参数，false 时忽略） 配置 { leading: false } 时，事件刚开始的那次回调不执行；配置 { trailing: false } 时，事件结束后的那次回调不执行，不过需要注意的是，这两者不能同时配置。</li></ul><p>所以在 underscore 中的节流函数有 3 种调用方式，默认的（有头有尾），设置 { leading: false } 的，以及设置 { trailing: false } 的。上面说过实现 throttle 的方案有 2 种，一种是通过时间戳判断，另一种是通过定时器创建和销毁来控制。</p><p>第一种方案实现这 3 种调用方式存在一个问题，即事件停止触发时无法响应回调，所以 { trailing: true } 时无法生效。</p><p>第二种方案来实现也存在一个问题，因为定时器是延迟执行的，所以事件停止触发时必然会响应回调，所以 { trailing: false } 时无法生效。</p><p>underscore 采用的方案是两种方案搭配使用来实现这个功能。</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>const throttle = function(func, wait, options) {
+  var timeout, context, args, result;
+
+  // 上一次执行回调的时间戳
+  var previous = 0;
+
+  // 无传入参数时，初始化 options 为空对象
+  if (!options) options = {};
+
+  var later = function() {
+    // 当设置 { leading: false } 时
+    // 每次触发回调函数后设置 previous 为 0
+    // 不然为当前时间
+    previous = options.leading === false ? 0 : _.now();
+
+    // 防止内存泄漏，置为 null 便于后面根据 !timeout 设置新的 timeout
+    timeout = null;
+
+    // 执行函数
+    result = func.apply(context, args);
+    if (!timeout) context = args = null;
+  };
+
+  // 每次触发事件回调都执行这个函数
+  // 函数内判断是否执行 func
+  // func 才是我们业务层代码想要执行的函数
+  var throttled = function() {
+
+    // 记录当前时间
+    var now = _.now();
+
+    // 第一次执行时（此时 previous 为 0，之后为上一次时间戳）
+    // 并且设置了 { leading: false }（表示第一次回调不执行）
+    // 此时设置 previous 为当前值，表示刚执行过，本次就不执行了
+    if (!previous &amp;&amp; options.leading === false) previous = now;
+
+    // 距离下次触发 func 还需要等待的时间
+    var remaining = wait - (now - previous);
+    context = this;
+    args = arguments;
+
+    // 要么是到了间隔时间了，随即触发方法（remaining &lt;= 0）
+    // 要么是没有传入 {leading: false}，且第一次触发回调，即立即触发
+    // 此时 previous 为 0，wait - (now - previous) 也满足 &lt;= 0
+    // 之后便会把 previous 值迅速置为 now
+    if (remaining &lt;= 0 || remaining &gt; wait) {
+      if (timeout) {
+        clearTimeout(timeout);
+
+        // clearTimeout(timeout) 并不会把 timeout 设为 null
+        // 手动设置，便于后续判断
+        timeout = null;
+      }
+
+      // 设置 previous 为当前时间
+      previous = now;
+
+      // 执行 func 函数
+      result = func.apply(context, args);
+      if (!timeout) context = args = null;
+    } else if (!timeout &amp;&amp; options.trailing !== false) {
+      // 最后一次需要触发的情况
+      // 如果已经存在一个定时器，则不会进入该 if 分支
+      // 如果 {trailing: false}，即最后一次不需要触发了，也不会进入这个分支
+      // 间隔 remaining milliseconds 后触发 later 方法
+      timeout = setTimeout(later, remaining);
+    }
+    return result;
+  };
+
+  // 手动取消
+  throttled.cancel = function() {
+    clearTimeout(timeout);
+    previous = 0;
+    timeout = context = args = null;
+  };
+
+  // 执行 _.throttle 返回 throttled 函数
+  return throttled;
+};
+
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></div><!--[--><!--]--></div><footer class="page-meta"><div class="meta-item edit-link"><a class="external-link meta-item-label" href="https://github.com/yujun9008/yujun9008.github.io/edit/master/docs/JS/节流函数throttle.md" rel="noopener noreferrer" target="_blank" aria-label="在 GitHub 上编辑此页"><!--[--><!--]--> 在 GitHub 上编辑此页 <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">在新窗口打开</span></span><!--[--><!--]--></a></div><!----><!----></footer><nav class="page-nav"><p class="inner"><span class="prev"><a href="/JS/%E9%98%B2%E6%8A%96%E5%87%BD%E6%95%B0debounce.html" class="" aria-label="防抖函数 debounce"><!--[--><!--]--> 防抖函数 debounce <!--[--><!--]--></a></span><!----></p></nav><!--[--><!--]--></main><!--]--></div><!----><!--]--></div>
+    <script type="module" src="/assets/app.01d1d898.js" defer></script>
+  </body>
+</html>
