@@ -8,6 +8,18 @@ module.exports = [
     link: "/JS/",
   },
   {
+    text: "React",
+    link: "/React/",
+  },
+  {
+    text: "Webpack",
+    link: "/Webpack/",
+  },
+  {
+    text: "技术",
+    link: "/teach/",
+  },
+  {
     text: "了解更多",
     children: [
       {
@@ -16,7 +28,7 @@ module.exports = [
       },
       {
         text: "React SSR博客",
-        link: "http://www.liuweibo.cn",
+        link: "http://www.yujun.cn",
       },
       {
         text: "个人常用工具库",
@@ -25,10 +37,6 @@ module.exports = [
       {
         text: "静态网站生成器",
         link: "https://v2.vuepress.vuejs.org/zh/",
-      },
-      {
-        text: "萌萌哒看板娘",
-        link: "https://github.com/stevenjoezhang/live2d-widget",
       },
     ],
   },
