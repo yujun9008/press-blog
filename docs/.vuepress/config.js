@@ -10,7 +10,7 @@ export default {
   description: "记录前端体系",
   head,
   theme: defaultTheme({
-    logo: "/images/avatar.jpg",
+    logo: "/images/homeLogo.jpg",
     repo: "https://github.com/yujun9008/yujun9008.github.io",
     navbar,
     sidebar,
