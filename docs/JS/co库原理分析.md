@@ -1,4 +1,4 @@
-# 防抖函数 debounce
+# co库原理分析
 
 > JSON Web Token 介绍及基于 koa2 实现一个简单的 JWT 鉴权
 

@@ -8,9 +8,11 @@
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "deploy": "sh scripts/deploy.sh"
+    "deploy": "sh scripts/deploy.sh",
   },
   "devDependencies": {
-    "vuepress": "^2.0.0-beta.54"
+    "@vuepress/client": "2.0.0-beta.60",
+    "vue": "^3.2.47",
+    "vuepress": "2.0.0-beta.60"
   }
 }

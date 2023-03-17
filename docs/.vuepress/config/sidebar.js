@@ -5,12 +5,7 @@ module.exports = {
       children: ["/guide.md"],
     },
   ],
-  "/JS/": [
-    {
-      text: "前端基础",
-      children: ["/JS/防抖函数debounce.md", "/JS/节流函数throttle.md"],
-    },
-  ],
+  "/JS/": ['JWT实践'],
   "/Utils/": [
     {
       text: "前端工具-其他",

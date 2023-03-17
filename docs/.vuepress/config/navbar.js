@@ -17,7 +17,7 @@ module.exports = [
   },
   {
     text: "技术",
-    link: "/teach/",
+    link: "/Teach/",
   },
   {
     text: "了解更多",

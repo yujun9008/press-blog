@@ -10,10 +10,11 @@ export default {
   description: "记录前端体系",
   head,
   theme: defaultTheme({
-    logo: "/images/homeLogo.jpg",
+    logo: "/images/homeLogo.png",
     repo: "https://github.com/yujun9008/yujun9008.github.io",
     navbar,
     sidebar,
+    sidebarDepth:0,
     // 404 page
     notFound: [
       "这里什么都没有",
